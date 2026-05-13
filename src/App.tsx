@@ -13,10 +13,7 @@ function MarkdownLiveEditor() {
     }
 
     return(
-        <body className='
-            bg-[#cfcfcf]
-            m-4
-        '>
+        <main className='m-4'>
             <p className='
                 font-righteous
                 text-lg
@@ -25,56 +22,74 @@ function MarkdownLiveEditor() {
                 mb-2
             '>MARKDOWN LIVE EDITOR</p>
 
-            <main className='bg-[#cfcfcf]'>
-                <div>
-                      <textarea
-                          value={plaintext}
-                          onChange={(event) => setPlaintext(event.target.value)}
-                          placeholder='Input Text'
-                          className='
-                              font-poppins
-                              text-md
-                              text-[#333]
-                              w-full
-                              h-60
-                              border-2
-                              border-solid
-                              border-[#333]
-                              bg-[#f4f4f4]
-                              p-4
-                              mb-8
-                              placeholder-font-normal
-                              placeholder-[#9ca3af]
-                              [&:::-webkit-scrollbar]:hidden
-                          '
-                      ></textarea>
-                </div>
+            <div>
+                <textarea
+                    value={plaintext}
+                    onChange={(event) => setPlaintext(event.target.value)}
+                    placeholder='Input Text'
+                    className='
+                        font-poppins
+                        text-md
+                        text-[#333]
+                        w-full
+                        h-60
+                        border-2
+                        border-solid
+                        border-[#333]
+                        bg-[#f4f4f4]
+                        p-4
+                        mb-8
+                        placeholder-font-normal
+                        placeholder-[#9ca3af]
+                        [&:::-webkit-scrollbar]:hidden
+                    '
+                ></textarea>
+            </div>
 
-                <div className='flex-col'>
-                      <div
-                          dangerouslySetInnerHTML={{ __html: getCleanedHTML(plaintext) }}
-                          className='
-                              text-md
-                              bg-[#f4f4f4]
-                              border-2
-                              border-solid
-                              border-[#333]
-                              w-full
-                              h-60
-                              p-4
-                              list-inside
-                              wrap-break-word
-                              overflow-y-scroll
-                              whitespace-pre-wrap
-                              [&_code]:font-mono! [&_code]:font-bold! 
-                              [&_pre]:font-mono! [&_pre]:!font-bold!
-                              [&_tr]:[page-break-inside:avoid]
-                          '
-                      ></div>
-                      <button onClick={window.print}>Print PDF</button>
-                </div>
-            </main>
-        </body>
+            <div className='flex-col'>
+                <div
+                    className={`
+                        font-poppins
+                        relative 
+                        text-base 
+                        bg-[#f4f4f4] 
+                        border-2 
+                        border-solid 
+                        border-[#333] 
+                        w-full 
+                        h-60 
+                        p-4 
+                        overflow-y-scroll 
+                        list-inside! 
+                        wrap-break-words 
+                        whitespace-pre-wrap!
+                        [&_code]:font-mono! [&_code]:font-bold! 
+                        [&_pre]:font-mono! [&_pre]:font-bold!
+                        [&_table]:border-2! [&_table]:border-solid! [&_table]:border-[#333]! [&_table]:border-collapse!
+                        [&_th]:border-2! [&_th]:border-solid! [&_th]:border-[#333]! [&_th]:p-[0.2rem]! [&_th]:font-bold!
+                        [&_td]:border-2! [&_td]:border-solid! [&_td]:border-[#333]! [&_td]:p-[0.2rem]!
+                        [&_tr]:[page-break-inside:avoid]!
+                        ${!plaintext ? "before:content-['Output_Markdown'] before:text-[#9ca3af]" : ""}
+                    `}
+                    dangerouslySetInnerHTML={{ __html: getCleanedHTML(plaintext) }}
+                ></div>
+                <button 
+                    onClick={window.print}
+                    className='
+                        text-base
+                        text-[#f4f4f4]
+                        bg-[#333]
+                        border-none
+                        py-[0.2rem]
+                        w-full
+                        hover:opacity-80
+                    '
+                >
+                    Print PDF
+                </button>
+            </div>
+
+        </main>
     );
 }
 
