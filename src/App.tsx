@@ -22,7 +22,7 @@ function MarkdownLiveEditor() {
                 mb-2
             '>MARKDOWN LIVE EDITOR</p>
 
-            <div>
+            <div className='print:invisible'>
                 <textarea
                     value={plaintext}
                     onChange={(event) => setPlaintext(event.target.value)}
@@ -60,21 +60,21 @@ function MarkdownLiveEditor() {
                         h-60 
                         p-4 
                         overflow-y-scroll 
-                        list-inside! 
-                        wrap-break-words 
-                        whitespace-pre-wrap!
-                        [&_code]:font-mono! [&_code]:font-bold! 
-                        [&_pre]:font-mono! [&_pre]:font-bold!
+                        wrap-break-words
                         [&_table]:border-2! [&_table]:border-solid! [&_table]:border-[#333]! [&_table]:border-collapse!
                         [&_th]:border-2! [&_th]:border-solid! [&_th]:border-[#333]! [&_th]:p-[0.2rem]! [&_th]:font-bold!
                         [&_td]:border-2! [&_td]:border-solid! [&_td]:border-[#333]! [&_td]:p-[0.2rem]!
                         [&_tr]:[page-break-inside:avoid]!
+                        prose
+                        max-w-none
+                        print:static! print:h-auto! print:max-h-none! print:overflow-visible! 
+                        print:border-none! print:p-0! print:m-0!
                         ${!plaintext ? "before:content-['Output_Markdown'] before:text-[#9ca3af]" : ""}
                     `}
                     dangerouslySetInnerHTML={{ __html: getCleanedHTML(plaintext) }}
                 ></div>
                 <button 
-                    onClick={window.print}
+                    onClick={() => window.print()}
                     className='
                         text-base
                         text-[#f4f4f4]
