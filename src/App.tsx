@@ -20,9 +20,10 @@ function MarkdownLiveEditor() {
                 text-[#666]
                 text-center
                 mb-2
+                print:hidden
             '>MARKDOWN LIVE EDITOR</p>
 
-            <div className='print:invisible'>
+            <div className='print:hidden'>
                 <textarea
                     value={plaintext}
                     onChange={(event) => setPlaintext(event.target.value)}
@@ -48,6 +49,7 @@ function MarkdownLiveEditor() {
 
             <div className='flex-col'>
                 <div
+                    id="markdown-output-display"
                     className={`
                         font-poppins
                         relative 
@@ -83,6 +85,7 @@ function MarkdownLiveEditor() {
                         py-[0.2rem]
                         w-full
                         hover:opacity-80
+                        print:hidden
                     '
                 >
                     Print PDF
