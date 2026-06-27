@@ -13,86 +13,88 @@ function MarkdownLiveEditor() {
     }
 
     return(
-        <main className='m-4 md:m-8 lg:m-4'>
-            <p className='
-                font-righteous
-                text-lg md:text-2xl lg:text-lg
-                text-[#666]
-                text-center
-                mb-2 md:mb-4
-                print:hidden
-            '>MARKDOWN LIVE EDITOR</p>
+        <main className='min-h-screen bg-[#f0f0f0] text-black p-4 md:p-8 lg:p-8 font-poppins selection:bg-gray-300 flex flex-col'>
+            <header className='mb-4 md:mb-8 text-center print:hidden shrink-0'>
+                <h1 className='font-righteous text-3xl md:text-5xl tracking-tight text-black uppercase m-0'>
+                    Markdown Live Editor
+                </h1>
+            </header>
 
-            <div className='lg:flex lg:m-4 lg:flex-row lg:justify-evenly'>
-                <div className='print:hidden'>
+            <div className='flex flex-col lg:flex-row gap-6 md:gap-8 justify-center items-stretch max-w-360 w-full mx-auto'>
+                <div className='flex-1 flex flex-col min-w-0 print:hidden'>
+                    <div className='bg-black text-white px-4 py-2 border-2 border-black border-b-0 shrink-0'>
+                        <span className='font-bold text-sm tracking-widest uppercase'>Input</span>
+                    </div>
                     <textarea
                         value={plaintext}
                         onChange={(event) => setPlaintext(event.target.value)}
-                        placeholder='Input Text'
+                        placeholder='Type markdown here...'
                         className='
-                            font-poppins
-                            text-base md:text-2xl lg:text-base
-                          text-[#333]
-                            w-full lg:w-115
-                            h-60 md:h-100 lg:h-115
-                            border-2 md:border-3
-                            border-solid
-                          border-[#333]
-                          bg-[#f4f4f4]
-                            p-4 md:p-8 lg:p-4
-                            mb-8 lg:mb-0
-                            placeholder-font-normal
-                          placeholder-[#9ca3af]
-                           [&:::-webkit-scrollbar]:hidden
+                            w-full
+                            h-55 md:h-90 lg:h-115
+                            p-4 md:p-6
+                            text-base md:text-lg
+                            bg-white
+                            text-black
+                            border-2 border-black
+                            rounded-none
+                            focus:outline-none focus:ring-0
+                            placeholder-gray-400
+                            resize-none
+                            overflow-y-scroll
                         '
                     ></textarea>
                 </div>
 
-                <div className='flex-col'>
-                    <div
-                        id="markdown-output-display"
-                        className={`
-                            font-poppins
-                            relative 
-                            text-base md:text-2xl lg:text-base
-                          bg-[#f4f4f4] 
-                            border-2 md:border-3
-                            border-solid 
-                          border-[#333] 
-                            w-full lg:w-115
-                            h-60 md:h-100 lg:h-115
-                            p-4 md:p-8 lg:p-4
-                            overflow-y-scroll 
-                            [&:::-webkit-scrollbar]:hidden
-                            wrap-break-words
-                            [&_table]:border-2! [&_table]:border-solid! [&_table]:border-[#333]! [&_table]:border-collapse!
-                            [&_th]:border-2! [&_th]:border-solid! [&_th]:border-[#333]! [&_th]:p-[0.2rem]! [&_th]:font-bold!
-                            [&_td]:border-2! [&_td]:border-solid! [&_td]:border-[#333]! [&_td]:p-[0.2rem]!
-                            [&_tr]:[page-break-inside:avoid]!
-                            prose
-                            max-w-none
-                            print:static! print:h-auto! print:max-h-none! print:overflow-visible! 
-                            print:border-none! print:p-0! print:m-0!
-                            ${!plaintext ? "before:content-['Output_Markdown'] before:text-[#9ca3af]" : ""}
-                        `}
-                        dangerouslySetInnerHTML={{ __html: getCleanedHTML(plaintext) }}
-                    ></div>
-                    <button 
-                        onClick={() => window.print()}
-                        className='
-                            font-poppins
-                            text-base md:text-2xl lg:text-base
-                          text-[#f4f4f4]
-                          bg-[#333]
-                            border-none
-                            py-[0.2rem] md:py-2 lg:py-[0.2rem]
-                            w-full
-                            hover:opacity-80
+                <div className='flex-1 flex flex-col min-w-0'>
+                    <div className='bg-black text-white px-4 py-2 border-2 border-black border-b-0 flex justify-between items-center shrink-0 print:hidden'>
+                        <span className='font-bold text-sm tracking-widest uppercase'>Output</span>
+                        <button 
+                            onClick={() => window.print()}
+                            className='
+                                text-xs md:text-sm font-bold uppercase tracking-wider
+                                bg-white text-black
+                                px-3 py-1
+                                hover:bg-gray-300
+                                border-none
+                                rounded-none
+                                cursor-pointer
+                            '
+                        >
+                            Print PDF
+                        </button>
+                    </div>
+                    {plaintext ? (
+                        <div
+                            id="markdown-output-display"
+                            className="
+                                w-full h-100 md:h-125 lg:h-162.5 p-4 md:p-6 text-base md:text-lg
+                                bg-white border-2 border-black overflow-y-scroll
+                                prose prose-neutral max-w-none
+                                prose-headings:font-bold prose-headings:text-black
+                                prose-p:text-black prose-a:text-black prose-a:underline prose-a:decoration-black
+                                prose-strong:text-black prose-strong:font-bold
+                                prose-code:text-black prose-code:bg-gray-200 prose-code:px-1
+                                prose-pre:bg-gray-100 prose-pre:text-black prose-pre:border-2 prose-pre:border-black prose-pre:rounded-none
+                                prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:bg-gray-100 prose-blockquote:text-black prose-blockquote:not-italic prose-blockquote:py-1
+                                [&_table]:w-full [&_table]:border-2 [&_table]:border-black [&_table]:border-collapse [&_table]:table-fixed
+                                [&_th]:border-2 [&_th]:border-black [&_th]:p-2 [&_th]:bg-gray-200 [&_th]:text-left [&_th]:font-bold [&_th]:wrap-break-word
+                                [&_td]:border-2 [&_td]:border-black [&_td]:p-2 [&_td]:wrap-break-word
+                                [&_hr]:border-black [&_hr]:border-t-2
+                                print:min-h-0 print:border-none print:p-0 print:h-auto print:overflow-visible
+                            "
+                            dangerouslySetInnerHTML={{ __html: getCleanedHTML(plaintext) }}
+                        ></div>
+                    ) : (
+                        <div className="
+                            w-full h-55 md:h-90 lg:h-115 p-4 md:p-6 text-base md:text-lg
+                            bg-gray-50 border-2 border-black flex items-center justify-center text-gray-500 italic
                             print:hidden
-                        '
-                    >
-                        Print PDF
-                    </button>
+                            overflow-y-scroll
+                        ">
+                            Preview will appear here
+                        </div>
+                    )}
                 </div>
             </div>
         </main>
