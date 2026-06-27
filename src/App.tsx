@@ -13,9 +13,9 @@ function MarkdownLiveEditor() {
     }
 
     return(
-        <main className='min-h-screen bg-[#f0f0f0] text-black p-4 md:p-8 lg:p-8 font-poppins selection:bg-gray-300 flex flex-col'>
+        <main className='min-h-screen bg-[#f0f0f0] text-black p-4 md:p-8 lg:p-8 font-sans selection:bg-gray-300 flex flex-col'>
             <header className='mb-4 md:mb-8 text-center print:hidden shrink-0'>
-                <h1 className='font-righteous text-3xl md:text-5xl tracking-tight text-black uppercase m-0'>
+                <h1 className='font-sans font-black text-3xl md:text-5xl tracking-tight text-black uppercase m-0'>
                     Markdown Live Editor
                 </h1>
             </header>
@@ -30,6 +30,7 @@ function MarkdownLiveEditor() {
                         onChange={(event) => setPlaintext(event.target.value)}
                         placeholder='Type markdown here...'
                         className='
+                            font-mono
                             w-full
                             h-55 md:h-90 lg:h-115
                             p-4 md:p-6
@@ -68,7 +69,7 @@ function MarkdownLiveEditor() {
                         <div
                             id="markdown-output-display"
                             className="
-                                w-full h-100 md:h-125 lg:h-162.5 p-4 md:p-6 text-base md:text-lg
+                                w-full h-55 md:h-90 lg:h-115 p-4 md:p-6 text-base md:text-lg
                                 bg-white border-2 border-black overflow-y-scroll
                                 prose prose-neutral max-w-none
                                 prose-headings:font-bold prose-headings:text-black
